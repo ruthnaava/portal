@@ -1,0 +1,762 @@
+/* Stunning Student Panel Redesign */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #4e54c8;
+    --primary-gradient: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    --secondary: #6a11cb;
+    --secondary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --accent: #ff7be5;
+    --text-dark: #2d3436;
+    --text-light: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --sidebar-bg: rgba(78, 84, 200, 0.95);
+    --topbar-bg: rgba(106, 17, 203, 0.95);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 16px;
+    --sidebar-width: 280px;
+    --sidebar-min-width: 80px;
+    --topbar-height: 80px;
+}
+
+/* Reset and base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
+
+/* Glassmorphism effect */
+.glass {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* Topbar Styles */
+.student-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--topbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-light);
+    height: var(--topbar-height);
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.sidebar-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: var(--text-light);
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    aspect-ratio: 1/1;
+    padding: 0;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.topbar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(to right, #fff, #ffccfe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.topbar-user:hover {
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Sidebar Styles */
+.student-sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-light);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: var(--topbar-height);
+    z-index: 999;
+    transition: var(--transition);
+    overflow-x: hidden;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.sidebar-logo {
+    min-width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.sidebar-logo:hover {
+    transform: scale(1.05);
+}
+
+.sidebar-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar-school {
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: linear-gradient(to right, #fff, #c0c3ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0 0.5rem;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.sidebar-menu a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.sidebar-menu a:hover::before {
+    left: 100%;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+}
+
+.sidebar-menu a.active {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-menu a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--accent);
+    border-radius: 0 4px 4px 0;
+}
+
+.sidebar-menu i {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.menu-text {
+    white-space: nowrap;
+    opacity: 1;
+    transition: var(--transition);
+}
+
+.sidebar-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.sidebar-resizer:hover, .sidebar-resizer:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Collapsed Sidebar */
+.student-sidebar.collapsed {
+    width: var(--sidebar-min-width);
+}
+
+.student-sidebar.collapsed .sidebar-header {
+    justify-content: center;
+    padding: 1.5rem 0.5rem 1rem;
+}
+
+.student-sidebar.collapsed .sidebar-school,
+.student-sidebar.collapsed .menu-text {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.student-sidebar.collapsed .sidebar-menu i {
+    margin-right: 0;
+}
+
+.student-sidebar.collapsed .sidebar-menu a {
+    justify-content: center;
+    padding: 1rem 0.5rem;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: calc(var(--topbar-height) + 1.5rem) 2rem 2rem;
+    transition: var(--transition);
+    min-height: 100vh;
+}
+
+.student-sidebar.collapsed ~ .main-content {
+    margin-left: var(--sidebar-min-width);
+}
+
+/* Backwards-compatibility alias: some pages use .student-content */
+.student-content {
+    margin-left: var(--sidebar-width);
+    padding: calc(var(--topbar-height) + 1.5rem) 2rem 2rem 2rem;
+    transition: var(--transition);
+    min-height: 100vh;
+}
+
+/* Dashboard Content */
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    font-size: 2.2rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.welcome-card {
+    background: var(--secondary-gradient);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    transform: rotate(30deg);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-gradient);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.card h3 i {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Table Styles */
+table.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+table.modern-table th, table.modern-table td {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    text-align: left;
+}
+table.modern-table th {
+    background: var(--primary-gradient);
+    color: var(--text-light);
+    font-weight: 500;
+}
+table.modern-table tr:nth-child(even) {
+    background: rgba(245, 247, 250, 0.7);
+}
+
+/* Button Styles */
+.modern-btn {
+    background: var(--primary-gradient);
+    color: var(--text-light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+}
+
+.modern-btn:hover {
+    background: var(--secondary-gradient);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(78, 84, 200, 0.4);
+}
+
+/* Form Styles */
+.modern-input, select.modern-input, textarea.modern-input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.modern-input:focus, select.modern-input:focus, textarea.modern-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.2);
+}
+
+/* Alert Styles */
+.alert-success {
+    color: #155724;
+    background: rgba(212, 237, 218, 0.9);
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.alert-error {
+    color: #721c24;
+    background: rgba(248, 215, 218, 0.9);
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Profile and Password Sections */
+.profile-section, .password-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(78,84,200,0.12), 0 1.5px 6px 0 rgba(143,148,251,0.10);
+  padding: 2.2rem 2.5rem 2.2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1);
+}
+.profile-section:before, .password-section:before {
+  content: '';
+  position: absolute;
+  top: -40px; left: -40px;
+  width: 120px; height: 120px;
+  background: var(--primary-gradient);
+  opacity: 0.08;
+  border-radius: 50%;
+  z-index: 0;
+}
+.profile-section h3, .password-section h3 {
+  margin-bottom: 1.2em;
+  color: var(--primary, #4e54c8);
+  font-size: 1.4em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.profile-section h3:before {
+  content: '\f007';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  color: var(--secondary, #6a11cb);
+  font-size: 1.2em;
+}
+.password-section h3:before {
+  content: '\f084';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  color: var(--accent, #ff7be5);
+  font-size: 1.2em;
+}
+.modern-form label {
+  display: block;
+  margin-bottom: 1.2em;
+  color: #333;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.modern-form input[type="text"],
+.modern-form input[type="email"],
+.modern-form input[type="date"],
+.modern-form input[type="password"] {
+  width: 100%;
+  padding: 0.8em 1.1em;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 1.05em;
+  background: #f9fafe;
+  margin-top: 0.3em;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(78,84,200,0.04);
+}
+.modern-form input:focus {
+  border: 2px solid var(--primary, #4e54c8);
+  outline: none;
+  box-shadow: 0 0 0 2px #8f94fb33;
+}
+.modern-btn {
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8em 2.2em;
+  font-size: 1.08em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 0.5em;
+  box-shadow: 0 2px 8px rgba(143,148,251,0.10);
+}
+.modern-btn:hover {
+  background: var(--secondary-gradient);
+  box-shadow: 0 4px 16px rgba(143,148,251,0.13);
+}
+.alert-success, .alert-error {
+  max-width: 520px;
+  margin: 1.5em auto 0 auto;
+  padding: 1.1em 1.7em;
+  border-radius: 10px;
+  font-size: 1.13em;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 4px rgba(78,84,200,0.07);
+}
+.alert-success {
+  background: #e6f9e6;
+  color: #1a7f1a;
+  border: 1.5px solid #b6e6b6;
+}
+.alert-error {
+  background: #ffeaea;
+  color: #c00;
+  border: 1.5px solid #f5bcbc;
+}
+@media (max-width: 600px) {
+  .profile-section, .password-section {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+  }
+  .main-content {
+    padding: 1.2rem 0.5rem;
+  }
+  .sidebar-toggle {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    padding: 0;
+  }
+}
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .student-sidebar {
+        left: -100%;
+        width: var(--sidebar-width);
+        position: fixed;
+        z-index: 2000;
+        transition: left 0.3s;
+    }
+    .student-sidebar.open {
+        left: 0;
+        box-shadow: 0 0 0 9999px rgba(0,0,0,0.25);
+    }
+    .main-content {
+        margin-left: 0 !important;
+        z-index: 1;
+        position: relative;
+    }
+    .profile-password-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+}
+
+/* Sidebar overlay for mobile */
+@media (max-width: 992px) {
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: 1500;
+  }
+  .student-sidebar.open ~ .sidebar-overlay {
+    display: block;
+  }
+}
+
+/* Animation for sidebar items */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.sidebar-menu li {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.sidebar-menu li:nth-child(1) { animation-delay: 0.1s; }
+.sidebar-menu li:nth-child(2) { animation-delay: 0.15s; }
+.sidebar-menu li:nth-child(3) { animation-delay: 0.2s; }
+.sidebar-menu li:nth-child(4) { animation-delay: 0.25s; }
+.sidebar-menu li:nth-child(5) { animation-delay: 0.3s; }
+.sidebar-menu li:nth-child(6) { animation-delay: 0.35s; }
+.sidebar-menu li:nth-child(7) { animation-delay: 0.4s; }
+.sidebar-menu li:nth-child(8) { animation-delay: 0.45s; }
+.sidebar-menu li:nth-child(9) { animation-delay: 0.5s; }
+
+.profile-password-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.profile-password-row .profile-section,
+.profile-password-row .password-section {
+  flex: 1 1 340px;
+  min-width: 320px;
+  max-width: 520px;
+}
+@media (max-width: 900px) {
+  .profile-password-row {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* --- Student green theme overrides and heading styles --- */
+:root {
+        --school-green: #198754;
+}
+
+/* Force headings to use school green and remove text-clip gradients */
+body h1, body h2, body h3, body h4, body h5, body h6 {
+        color: var(--school-green) !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        -webkit-text-fill-color: unset !important;
+}
+
+.page-title { font-size:1.6rem; margin-bottom:0.75rem; color:var(--school-green); font-weight:700; }
+
+/* Make card accent green */
+.card::before { background: linear-gradient(90deg, rgba(25,135,84,1), rgba(40,180,110,1)); }
+
+/* Table header in green */
+table.modern-table th {
+        background: linear-gradient(90deg, #198754, #36b37a);
+        color: #fff;
+        font-weight: 600;
+}
+
+/* Forms and profile sections use subtle green accents */
+.profile-section, .password-section { background: linear-gradient(180deg, rgba(25,135,84,0.03), rgba(255,255,255,0.6)); }
+.profile-section h3, .password-section h3 { color: var(--school-green); }
+
+/* Small utility */
+.muted { color: #6b756d; }

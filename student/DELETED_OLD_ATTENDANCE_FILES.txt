@@ -1,0 +1,7 @@
+Deleted obsolete attendance files:
+- myattendancethismonth.php
+- myattendanceabsentall.php
+- myattendanceabsentthismonth.php
+- myattendanceall.php
+
+All attendance features are now unified in attendance.php.
